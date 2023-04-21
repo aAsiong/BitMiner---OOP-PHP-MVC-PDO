@@ -1,0 +1,17 @@
+Things to Implement
+
+1. Proper use of the View-Model
+
+2. Updating of Records
+
+3. Deletion of Records (Deactivate Account)
+
+4. VALIDATION
+
+5. ERROR PROMPTS
+
+6. Auto-incrementing data_mined in Dashboard for dynamic feel
+(^ the data_mined will just count++ so long as the machine is activated)
+
+7. Additional Featuers
+(^ will be flshed out while doing the rest)
