@@ -3,15 +3,22 @@
 session_start();
 
 class logincntr extends loginmdl {
+    private $username;
+    private $password;
 
-    public function pssCrd($username, $password) {
-        $gotArray = $this->vfyLogIn($username, $password);
+    public function __construct($username, $password) {
+        $this->username = $username;
+        $this->password = $password;    
+    }
+
+    public function pssCrd() {
+        $gotArray = $this->vfyLogIn($this->username, $this->password);
         $postCount = count($gotArray);
         if ($postCount === 1) {
             $_SESSION['id'] = $gotArray[0]['id'];
-            header('Location: ../btminer-mvc/dashboard.php');
+            return true;
         } else {
-            header('Location: ../btminer-mvc/index.php?e=1');
+            return false;
         }
     }
 
@@ -29,6 +36,18 @@ class logincntr extends loginmdl {
         } catch (Exception $e) {
             return 0;
         }
+    }
+}
+
+function chckDtts($gt_Dtts) {
+    $ddts = '';
+    foreach ($gt_Dtts as $dtts) {
+        if (empty($ddts)) {
+            header("Location: ./index.php?err=" . $ddts);
+            return false;
+            die();
+        }
+        return true;
     }
 }
 
