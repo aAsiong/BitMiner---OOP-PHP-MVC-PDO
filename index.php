@@ -1,22 +1,7 @@
 <?php
 
-require '../btminer-mvc/includes/autoloader.inc.php';
-
-$unameErr = $pwdErr = '';
-
-if (isset($_POST['submit'])) {
-    empty($_POST['username']) ? $unameErr = "Invalid Username Input" : null ;
-    empty($_POST['password']) ? $pwdErr = "Invalid Password Input" : null;
-
-    if (empty($unameErr) && empty($pwdErr)) {
-        $crtObj = new logincntr();
-        $crtObj->pssCrd($_POST['username'], $_POST['password']);
-    } else {
-
-    }
-} else {
-
-}
+//require '../btminer-mvc/includes/autoloader.inc.php';
+session_start();
 
 ?>
 
@@ -77,7 +62,7 @@ if (isset($_POST['submit'])) {
 
     <main>
         <form method="POST" class="frm-Cntnr"
-        action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        action="./includes/login.includes.php">
             <span>BitMiner Login</span>
             <div id="dvMsg">
 
@@ -112,38 +97,20 @@ if (isset($_POST['submit'])) {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     var getKeys = urlParams.keys();
-    var getValues = urlParams.values();
-    var keyArray = valArray = [];
+    var keyArray = [];
 
     for (var gotKey of getKeys)
         keyArray.push(gotKey);
     
-    for (var gotVal of getValues)
-        valArray.push(gotVal);
-        
-    if (keyArray.includes('e')) {
+    let dvMsg = '';
+    if (keyArray.includes('err')) {
+        dvMsg = keyArray[keyArray.indexOf("err") + 1];
         document.getElementById("dvMsg").className = "invld-div";
-        switch(keyArray[keyArray.indexOf("e") + 1]) {
-            case 1:
-                document.getElementById("dvMsg").innerHTML = "Record Not Detected!"
-                break;
-            case 2:
-                document.getElementById("dvMsg").innerHTML = "Invalid Access!"
-                break;
-            default:
-                break;
-        }
-    } else if (keyArray.includes('s')) {
+        document.getElementById("dvMsg").innerHTML = dvMsg.replace("_", / /g);
+    } else if (keyArray.includes('scc')) {
+        dvMsg = keyArray[keyArray.indexOf("scc") + 1];
         document.getElementById("dvMsg").className = "vld-div";
-        switch(keyArray.indexOf("s") + 1) {
-            case 1:
-                document.getElementById("dvMsg").innerHTML = "Successfully Logout!";
-                break;
-            case 2:
-                break;
-            default:
-                break;
-        }
+        document.getElementById("dvMsg").innerHTML = dvMsg.replace("_", / /g);
     }
 </script>
 </html>

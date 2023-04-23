@@ -1,31 +1,7 @@
 <?php
 
-require '../btminer-mvc/includes/autoloader.inc.php';
-
-$unameErr = $pwdErr = $rePwdErr = $wMosIDErr = $wMosNameErr = '';
-
-if (isset($_POST['submit'])) {
-    empty($_POST['username']) ? $unameErr = "Invalid Username Input" : null ;
-    empty($_POST['password']) ? $pwdErr = "Invalid Password Input" : null;
-    empty($_POST['rpassword']) ? $rePwdErr = "Invalid Input" : null ;
-    empty($_POST['wemosID']) ? $wMosIDErr = "Invalid W. ID Input" : null ;
-    empty($_POST['wemosName']) ? $wMosNameErr = "Invalid W. Name Input" : null ;
-
-    if (empty($unameErr) && empty($pwdErr) && empty($rePwdErr) && empty($wMosIDErr) && empty($wMosNameErr)) {
-        if ($_POST['password'] == $_POST['rpassword']) {
-            $crtObj = new logincntr();
-            $chck = $crtObj->crtUsr($_POST['username'], $_POST['password'], $_POST['wemosID'], $_POST['wemosName']);
-            $chck == 1 ? header('Location: ./index.php') : header('Location: ./register.php');
-        } else {
-            $pwdErr = "Password Not Matching!";
-            $rePwdErr = "Password Not Matching!";
-        }
-    } else {
-
-    }
-} else {
-
-}
+//require '../btminer-mvc/includes/autoloader.inc.php';
+session_start();
 
 ?>
 
@@ -83,7 +59,7 @@ if (isset($_POST['submit'])) {
 
     <main>
         <form method="POST" class="frm-Cntnr"
-        action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        action="./includes/register.includes.php">
             <span>BitMiner Register User</span>
             <section>
                 <div class="form-control">

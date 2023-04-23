@@ -1,13 +1,7 @@
 <?php
 
-require '../btminer-mvc/includes/autoloader.inc.php';
-
-if(empty($_SESSION['id'])) {
-    $crtObj = new logincntr();
-    $dtArray = $crtObj->gtInfo($_SESSION['id']);
-} else {
-    header('Location: ../btminer-mvc/index.php?e=2');
-}
+//require '../btminer-mvc/includes/autoloader.inc.php';
+session_start();
 
 ?>
 
@@ -107,8 +101,11 @@ if(empty($_SESSION['id'])) {
 <script>
     document.getElementById('lgOut').addEventListener('click', lgOut);
     function lgOut() {
-        <?php $_SESSION["id"] = ""; ?>
-        window.location.href = './index.php?s=1'
+        <?php 
+            session_unset();
+            session_destroy();
+        ?>
+        window.location.href = './index.php?scc=Logout_Successful';
     }
 </script>
 </html>
