@@ -1,31 +1,33 @@
 <?php
 
-if (!isset($_POST['submit'])) {
-    die();
-}
-
-include './classes/Dbhmdl.class.php';
-include './classes/loginmdl.class.php';
-include './classes/logincntr.class.php';
-
-$username = $_POST['username'];
-$password = $_POST['password'];
 $unameErr = $pwdErr = $pgStt = '';
 
-empty($_POST['username']) ? $unameErr = "Invalid Username Input" : null ;
-empty($_POST['password']) ? $pwdErr = "Invalid Password Input" : null;
+if (isset($_POST['submit'])) {
+    
+    include "../classes/dbh.classes.php";
+    include '../classes/login.mdl.classes.php';
+    include '../classes/login.cntr.classes.php';
 
-if (empty($unameErr) && empty($pwdErr)) {
-    $crtObj = new logincntr($unameErr, $pwdErr);
-    $pgStt = $crtObj->pssCrd();
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-    if ($pgStt) {
-        header('Location: ../btminer-mvc/dashboard.php');
+    empty($_POST['username']) ? $unameErr = "Invalid Username Input" : null ;
+    empty($_POST['password']) ? $pwdErr = "Invalid Password Input" : null;
+
+    if (empty($unameErr) && empty($pwdErr)) {
+        $crtObj = new logincntr($username, $password);
+        $pgStt = $crtObj->pssCrd();
+
+        if ($pgStt) {
+            header('Location: ../dashboard.php');
+        } else {
+            header('Location: ../index.php?err=Record_Not_Found');
+        }
     } else {
+        
         header('Location: ../btminer-mvc/index.php?err=Record_Not_Found');
     }
-} else {
-
+    
 }
 
 ?>

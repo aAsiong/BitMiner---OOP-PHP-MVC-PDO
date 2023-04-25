@@ -1,6 +1,6 @@
 <?php 
 
-Class dashboardmdl extends dbhmdl {
+Class dashboardmdl extends dbh {
 
     public function gtRcrds($id) {
         $sql = "SELECT wmosID, wmosName, dt_mine 

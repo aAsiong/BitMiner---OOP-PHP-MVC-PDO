@@ -1,6 +1,7 @@
 <?php
 
 //require '../btminer-mvc/includes/autoloader.inc.php';
+include './includes/login.includes.php';
 session_start();
 
 ?>
@@ -97,20 +98,25 @@ session_start();
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     var getKeys = urlParams.keys();
-    var keyArray = [];
+    var getValues = urlParams.values();
+    var keyArray = valueArray = [];
 
     for (var gotKey of getKeys)
         keyArray.push(gotKey);
+        
+    for (var gotValue of getValues)
+        keyArray.push(gotValue);
     
-    let dvMsg = '';
+    let dvMsg;
     if (keyArray.includes('err')) {
-        dvMsg = keyArray[keyArray.indexOf("err") + 1];
+        let index = keyArray.indexOf("err") + 1;
+        dvMsg = keyArray[index];
         document.getElementById("dvMsg").className = "invld-div";
-        document.getElementById("dvMsg").innerHTML = dvMsg.replace("_", / /g);
+        document.getElementById("dvMsg").innerHTML = dvMsg.replaceAll("_", " ");
     } else if (keyArray.includes('scc')) {
         dvMsg = keyArray[keyArray.indexOf("scc") + 1];
         document.getElementById("dvMsg").className = "vld-div";
-        document.getElementById("dvMsg").innerHTML = dvMsg.replace("_", / /g);
+        document.getElementById("dvMsg").innerHTML = dvMsg.replaceAll("_", / /g);
     }
 </script>
 </html>

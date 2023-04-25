@@ -2,6 +2,7 @@
 
 //require '../btminer-mvc/includes/autoloader.inc.php';
 session_start();
+include './includes/register.includes.php';
 
 ?>
 
@@ -59,7 +60,7 @@ session_start();
 
     <main>
         <form method="POST" class="frm-Cntnr"
-        action="./includes/register.includes.php">
+        action="<?php echo($_SERVER['PHP_SELF']); ?>">
             <span>BitMiner Register User</span>
             <section>
                 <div class="form-control">
@@ -98,7 +99,10 @@ session_start();
                     <span>WeMos Name</span>
                 </div>
             </section>
-            <button type="submit" name="submit">Submit</button>
+            <section class="bttn-Cntnr">
+                <button type="submit" name="submit">Submit</button>
+                <button><a href="./index.php">Go Back</a></button>
+            </section>
         </form>
     </main>
 

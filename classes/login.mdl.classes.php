@@ -1,6 +1,6 @@
 <?php
 
-class loginmdl extends dbhmdl {
+class loginmdl extends dbh {
 
     public function vfyLogIn($username, $password) {
         $sql = "SELECT * FROM users WHERE username = ? 
